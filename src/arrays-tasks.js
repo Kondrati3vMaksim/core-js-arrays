@@ -80,13 +80,12 @@ function findElement(arr, value) {
  *    findAllOccurrences([ true, 0, 1, 'true' ], true) => 1
  */
 function findAllOccurrences(arr, item) {
-  let count = 0;
-  arr.forEach((it) => {
-    if (it === item) {
-      count++;
+  return arr.reduce((sum, items) => {
+    if (items === item) {
+      return sum + 1;
     }
-  });
-  return count;
+    return sum;
+  }, 0);
 }
 
 /**
@@ -183,10 +182,7 @@ function isValueEqualsIndex(arr) {
  *    insertItem([ 1, 'b', 'c'], 'x', 0) => [ 'x', 1, 'b', 'c' ]
  */
 function insertItem(arr, item, index) {
-  const left = arr.slice(0, index);
-  const right = arr.slice(index, arr.length + 1);
-  left.push(item);
-  return left.concat(right);
+  return arr.splice(index, 0, item);
 }
 
 /**
