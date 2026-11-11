@@ -339,7 +339,10 @@ function selectMany(arr, childrenSelector) {
  *   calculateBalance([]) => 0
  */
 function calculateBalance(arr) {
-  return arr.reduce((balance, [income, expense]) => balance + income - expense, 0);
+  return arr.reduce(
+    (balance, [income, expense]) => balance + income - expense,
+    0
+  );
 }
 
 /**
@@ -428,7 +431,7 @@ function getFalsyValuesCount(arr) {
  *                              [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-  return Array.from({ length: n }, (_, row) =>
+  return Array.from({ length: n }, (_rowValue, row) =>
     Array.from({ length: n }, (_, column) => (row === column ? 1 : 0))
   );
 }
@@ -459,7 +462,9 @@ function getIndicesOfOddNumbers(numbers) {
  *    getHexRGBValues([]) => []
  */
 function getHexRGBValues(arr) {
-  return arr.map((value) => `#${value.toString(16).toUpperCase().padStart(6, '0')}`);
+  return arr.map(
+    (value) => `#${value.toString(16).toUpperCase().padStart(6, '0')}`
+  );
 }
 
 /**
@@ -510,7 +515,8 @@ function findCommonElements(arr1, arr2) {
 function findLongestIncreasingSubsequence(nums) {
   return nums.reduce(
     (state, value, index) => {
-      const current = index > 0 && value > nums[index - 1] ? state.current + 1 : 1;
+      const current =
+        index > 0 && value > nums[index - 1] ? state.current + 1 : 1;
       return { current, max: Math.max(state.max, current) };
     },
     { current: 0, max: 0 }
@@ -551,7 +557,8 @@ function propagateItemsByPositionIndex(arr) {
 function shiftArray(arr, n) {
   if (arr.length === 0) return [];
   const shift = ((n % arr.length) + arr.length) % arr.length;
-  return arr.slice(-shift).concat(arr.slice(0, -shift || arr.length));
+  if (shift === 0) return [...arr];
+  return arr.slice(-shift).concat(arr.slice(0, -shift));
 }
 
 /**
@@ -569,8 +576,16 @@ function shiftArray(arr, n) {
  */
 function sortDigitNamesByNumericOrder(arr) {
   const digits = [
-    'zero', 'one', 'two', 'three', 'four',
-    'five', 'six', 'seven', 'eight', 'nine',
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
   ];
   return [...arr].sort((a, b) => digits.indexOf(a) - digits.indexOf(b));
 }
@@ -597,7 +612,8 @@ function sortDigitNamesByNumericOrder(arr) {
 function swapHeadAndTail(arr) {
   const half = Math.floor(arr.length / 2);
   const middle = arr.length % 2;
-  return arr.slice(half + middle)
+  return arr
+    .slice(half + middle)
     .concat(arr.slice(half, half + middle), arr.slice(0, half));
 }
 
